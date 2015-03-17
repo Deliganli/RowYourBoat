@@ -34,35 +34,43 @@ namespace RowYourBoat
             dangerous.Add(Characters.WOLF | Characters.SHEEP);
         }
 
-        private void solveProblem(List<Characters> leftShore, List<Characters> rightShore, Stack<Characters> moves)
-        {
-            Characters current = leftShore.First();
-            moves.Push(current);
-            rightShore.Add(current);
-            leftShore.Remove(current);
-
-            if (isDangerous(leftShore))
+        private void transport(ref List<Characters> from, ref List<Characters> to, Characters character) {
+            if (character != Characters.BOATMAN)
             {
-                rightShore.Remove(current);
-                leftShore.Add(current);
-                solveProblem(leftShore, rightShore, moves);
+                from.Remove(character);
+                to.Add(character);
+            }
+
+            from.Remove(Characters.BOATMAN);
+            to.Add(Characters.BOATMAN);
+        }
+
+        private void solveProblem(List<Characters> from, List<Characters> to, Stack<Characters> moves)
+        {
+            Characters current = from.First();
+            transport(ref from, ref to, current);
+            Console.WriteLine(current + " transport attemp");
+
+            if (isDangerous(from)) {
+                transport(ref to, ref from, current);
+                Console.WriteLine(current + " rollback");
+                solveProblem(from, to, moves);
+            }
+            else if (isDangerous(to)) {
+                transport(ref from, ref to, current);
+                Console.WriteLine(current + " rollback");
+                solveProblem(to, from, moves);
+            } else {
+                Console.WriteLine("next iteration");
+                to.Reverse();
+                solveProblem(to, from, moves);
             }
         }
 
-        private bool isDangerous(List<Characters> shore){
-            Characters current = new Characters();
-            foreach(Characters character in shore){
-                current |= character;
-            }
-            
-            foreach (Characters situation in dangerous) {
-                if (current.HasFlag(situation) && !current.HasFlag(Characters.BOATMAN))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+        private bool isDangerous(IEnumerable<Characters> shore)
+        {
+            var current = shore.Aggregate(new Characters(), (a, c) => a | c);
+            return dangerous.Any(situation => current.HasFlag(situation) && !current.HasFlag(Characters.BOATMAN));
         }
 
         private void RowYourBoat_Load(object sender, EventArgs e)
@@ -78,7 +86,7 @@ namespace RowYourBoat
 
             moves.Push(Characters.BOATMAN);
             bool res = isDangerous(leftShore);
-            //solveProblem(leftShore, rightShore, moves);
+            solveProblem(leftShore, rightShore, moves);
         }
 
     }
