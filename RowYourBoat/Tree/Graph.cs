@@ -39,7 +39,7 @@ namespace RowYourBoat
     {
         private readonly Dictionary<string, Vertex> vertexmap = new Dictionary<string, Vertex>();
 
-        public void addEdge(Char source, Char dest, int cost, string name)
+        public void addEdge(Char source, Char dest, string name)
         {
             Vertex v = getVertex(source.ToString());
             Vertex w = getVertex(dest.ToString());

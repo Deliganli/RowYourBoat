@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using RowYourBoat;
+using RowYourBoat.Tree;
 
 namespace RowYourBoat
 {
@@ -27,6 +27,13 @@ namespace RowYourBoat
             Vertex end = g.getVertex(Char.NONE.ToString());
             BFS.solve(start, end);
             printSolution(g.trace(end));
+            inflatePictures();
+        }
+
+        private void inflatePictures()
+        {
+            pbWolf.ImageLocation = "../coyote.png";
+            pbWolf.SizeMode = PictureBoxSizeMode.CenterImage;
         }
 
         private void printSolution(List<Vertex> solution)
@@ -40,25 +47,25 @@ namespace RowYourBoat
         private void createTree(Graph g)
         {
             g.addEdge(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE,
-                Char.CABBAGE | Char.WOLF, 1, "1");
+                Char.CABBAGE | Char.WOLF, "1");
             g.addEdge(Char.CABBAGE | Char.WOLF,
-                Char.BOATMAN | Char.CABBAGE | Char.WOLF, 1, "2");
+                Char.BOATMAN | Char.CABBAGE | Char.WOLF, "2");
             g.addEdge(Char.BOATMAN | Char.CABBAGE | Char.WOLF,
-                Char.WOLF, 1, "3");
+                Char.WOLF, "3");
             g.addEdge(Char.BOATMAN | Char.CABBAGE | Char.WOLF,
-                Char.CABBAGE, 1, "4");
+                Char.CABBAGE, "4");
             g.addEdge(Char.WOLF,
-                Char.BOATMAN | Char.SHEEP | Char.WOLF, 1, "5");
+                Char.BOATMAN | Char.SHEEP | Char.WOLF, "5");
             g.addEdge(Char.BOATMAN | Char.SHEEP | Char.WOLF,
-                Char.SHEEP, 1, "6");
+                Char.SHEEP, "6");
             g.addEdge(Char.CABBAGE,
-                Char.BOATMAN | Char.CABBAGE | Char.SHEEP, 1, "7");
+                Char.BOATMAN | Char.CABBAGE | Char.SHEEP, "7");
             g.addEdge(Char.BOATMAN | Char.CABBAGE | Char.SHEEP,
-                Char.SHEEP, 1, "8");
+                Char.SHEEP, "8");
             g.addEdge(Char.SHEEP,
-                Char.BOATMAN | Char.SHEEP, 1, "9");
+                Char.BOATMAN | Char.SHEEP, "9");
             g.addEdge(Char.BOATMAN | Char.SHEEP,
-                Char.NONE, 1, "10");
+                Char.NONE, "10");
         }
 
     }
