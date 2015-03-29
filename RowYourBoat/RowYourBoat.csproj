@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Char.cs" />
+    <Compile Include="Tree\DFS.cs" />
     <Compile Include="Tree\Graph.cs" />
     <Compile Include="Tree\BFS.cs" />
     <Compile Include="RowYourBoat.cs">

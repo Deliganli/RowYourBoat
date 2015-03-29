@@ -20,37 +20,44 @@ namespace RowYourBoat
         private void RowYourBoat_Load(object sender, EventArgs e)
         {
             lblInfo.Text = String.Empty;
-            lblPath.Text = String.Empty;
-            lblCost.Text = String.Empty;
 
             Graph g = new Graph();
             createTree(g);
-            Vertex start = g.GetVertex((Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE).ToString());
-            Vertex end = g.GetVertex(Char.NONE.ToString());
-            Queue<Vertex> result = BFS.solve(start, end);
+            Vertex start = g.getVertex((Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE).ToString());
+            Vertex end = g.getVertex(Char.NONE.ToString());
+            BFS.solve(start, end);
+            printSolution(g.trace(end));
+        }
+
+        private void printSolution(List<Vertex> solution)
+        {
+            foreach (Vertex v in solution)
+            {
+                lblInfo.Text += v.Name + Environment.NewLine;
+            }
         }
 
         private void createTree(Graph g)
         {
-            g.AddEdge(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE,
+            g.addEdge(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE,
                 Char.CABBAGE | Char.WOLF, 1, "1");
-            g.AddEdge(Char.CABBAGE | Char.WOLF,
+            g.addEdge(Char.CABBAGE | Char.WOLF,
                 Char.BOATMAN | Char.CABBAGE | Char.WOLF, 1, "2");
-            g.AddEdge(Char.BOATMAN | Char.CABBAGE | Char.WOLF,
+            g.addEdge(Char.BOATMAN | Char.CABBAGE | Char.WOLF,
                 Char.WOLF, 1, "3");
-            g.AddEdge(Char.BOATMAN | Char.CABBAGE | Char.WOLF,
+            g.addEdge(Char.BOATMAN | Char.CABBAGE | Char.WOLF,
                 Char.CABBAGE, 1, "4");
-            g.AddEdge(Char.WOLF,
+            g.addEdge(Char.WOLF,
                 Char.BOATMAN | Char.SHEEP | Char.WOLF, 1, "5");
-            g.AddEdge(Char.BOATMAN | Char.SHEEP | Char.WOLF,
+            g.addEdge(Char.BOATMAN | Char.SHEEP | Char.WOLF,
                 Char.SHEEP, 1, "6");
-            g.AddEdge(Char.CABBAGE,
+            g.addEdge(Char.CABBAGE,
                 Char.BOATMAN | Char.CABBAGE | Char.SHEEP, 1, "7");
-            g.AddEdge(Char.BOATMAN | Char.CABBAGE | Char.SHEEP,
+            g.addEdge(Char.BOATMAN | Char.CABBAGE | Char.SHEEP,
                 Char.SHEEP, 1, "8");
-            g.AddEdge(Char.SHEEP,
+            g.addEdge(Char.SHEEP,
                 Char.BOATMAN | Char.SHEEP, 1, "9");
-            g.AddEdge(Char.BOATMAN | Char.SHEEP,
+            g.addEdge(Char.BOATMAN | Char.SHEEP,
                 Char.NONE, 1, "10");
         }
 

@@ -10,7 +10,7 @@ namespace RowYourBoat
     {
         private static String DISCOVERED = "DISCOVERED";
         //Breadt First Search
-        public static Queue<Vertex> solve(Vertex vSource, Vertex vDest)
+        public static void solve(Vertex vSource, Vertex vDest)
         {
             Queue<Vertex> q = new Queue<Vertex>();
             q.Enqueue(vSource);
@@ -23,12 +23,16 @@ namespace RowYourBoat
                 {
                     if (prime.Destination.Status != DISCOVERED)
                     {
+                        prime.Destination.Parent = current;
+                        if (prime.Destination == vDest)
+                        {
+                            return;
+                        }
                         q.Enqueue(prime.Destination);
                         prime.Destination.Status = DISCOVERED;
                     }
                 }
             }//end-while
-            return q;
         }
     }
 }

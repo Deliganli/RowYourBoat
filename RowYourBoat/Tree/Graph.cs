@@ -10,12 +10,10 @@ namespace RowYourBoat
     {
         public Vertex Destination;
         public string Name;
-        public int Cost;
 
-        public Edge(Vertex destination, int cost, string name)
+        public Edge(Vertex destination, string name)
         {
             Destination = destination;
-            Cost = cost;
             Name = name;
         }
 
@@ -26,19 +24,14 @@ namespace RowYourBoat
         public string Name;
         public string Status;
         public List<Edge> Adjacents;
-        public List<Edge> rAdjacents;
-        public int Straight;
         public Vertex Parent;
-        public Edge Road;
 
-        public Vertex(string name, string status = "unchecked", int straight = int.MaxValue)
+        public Vertex(string name, string status = "unchecked")
         {
             Name = name;
             Status = status;
             Parent = null;
             Adjacents = new List<Edge>();
-            rAdjacents = new List<Edge>();
-            Straight = straight;
         }
     }
 
@@ -46,15 +39,14 @@ namespace RowYourBoat
     {
         private readonly Dictionary<string, Vertex> vertexmap = new Dictionary<string, Vertex>();
 
-        public void AddEdge(Char source, Char dest, int cost, string name)
+        public void addEdge(Char source, Char dest, int cost, string name)
         {
-            Vertex v = GetVertex(source.ToString());
-            Vertex w = GetVertex(dest.ToString());
-            v.Adjacents.Add(new Edge(w, cost, name));
-            w.rAdjacents.Add(new Edge(v, cost, name));
+            Vertex v = getVertex(source.ToString());
+            Vertex w = getVertex(dest.ToString());
+            v.Adjacents.Add(new Edge(w, name));
         }
 
-        public Vertex GetVertex(string vertexname)
+        public Vertex getVertex(string vertexname)
         {
             Vertex v;
             vertexmap.TryGetValue(vertexname, out v);
@@ -66,50 +58,19 @@ namespace RowYourBoat
             return v;
         }
 
-        public List<Vertex> traceVertex(Vertex source, Vertex dest)
+        public List<Vertex> trace(Vertex dest)
         {
-            List<Vertex> q = new List<Vertex>();
-            q.Add(dest);
-            int i = 0;
+            List<Vertex> list = new List<Vertex>() { dest };
 
-            try
+            do
             {
-                do
-                {
-                    q.Add(q[i++].Parent);
-                } while (q[i] != source);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
+                list.Add(dest.Parent);
+                dest = dest.Parent;
+            } while (dest.Parent != null);
 
             //from source to destination
-            q.Reverse();
-            return q;
-        }
-
-        public List<Edge> tracePath(Vertex source, Vertex dest)
-        {
-            List<Edge> q = new List<Edge>();
-
-            try
-            {
-                do
-                {
-                    q.Add(dest.Road);
-                    dest = dest.Parent;
-                } while (dest != source);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
-            //from source to destination
-            q.Reverse();
-            return q;
+            list.Reverse();
+            return list;
         }
     }
 }
