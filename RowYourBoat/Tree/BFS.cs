@@ -30,7 +30,5 @@ namespace RowYourBoat
             }//end-while
             return q;
         }
-
-        
     }
 }
