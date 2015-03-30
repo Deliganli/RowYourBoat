@@ -11,7 +11,9 @@ using RowYourBoat.Tree;
 namespace RowYourBoat
 {
     public partial class RowYourBoat : Form
-    {    
+    {
+        List<Char> dangerous;
+
         public RowYourBoat()
         {
             InitializeComponent();
@@ -20,14 +22,51 @@ namespace RowYourBoat
         private void RowYourBoat_Load(object sender, EventArgs e)
         {
             lblInfo.Text = String.Empty;
+            createDangerousSituations();
 
             Graph g = new Graph();
-            createTree(g);
+            //createTreeManually(g);
+            createTreeProgrammatically(g);
             Vertex start = g.getVertex((Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE).ToString());
             Vertex end = g.getVertex(Char.NONE.ToString());
             BFS.solve(start, end);
             printSolution(g.trace(end));
             inflatePictures();
+        }
+
+        private void createTreeProgrammatically(Graph g)
+        {
+            List<Char> nodes = new List<Char>();
+            List<Char> chars = new List<Char>(){Char.CABBAGE, Char.SHEEP, Char.WOLF};
+
+            Char transfer = chars.Aggregate(new Char(), (a, c) => a | c);
+            nodes.Add(transfer | Char.BOATMAN);
+            int i = 0;
+
+            while (nodes.Count > 0)
+            {
+                foreach (Char item in chars)
+                {
+                    if (transfer | Char.BOATMAN)
+                    {
+                        
+                    }
+                    g.addEdge(transfer | Char.BOATMAN, item | Char.BOATMAN, i++.ToString());
+                }
+            }
+
+        }
+
+        private void createDangerousSituations()
+        {
+            dangerous = new List<Char> { };
+            dangerous.Add(Char.SHEEP | Char.CABBAGE);
+            dangerous.Add(Char.WOLF | Char.SHEEP);
+        }
+
+        private bool isDangerous(Char current)
+        {
+            return dangerous.Any(situation => current.HasFlag(situation) && !current.HasFlag(Char.BOATMAN));
         }
 
         private void inflatePictures()
@@ -44,7 +83,7 @@ namespace RowYourBoat
             }
         }
 
-        private void createTree(Graph g)
+        private void createTreeManually(Graph g)
         {
             g.addEdge(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE,
                 Char.CABBAGE | Char.WOLF, "1");
