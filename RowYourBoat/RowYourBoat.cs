@@ -36,25 +36,52 @@ namespace RowYourBoat
 
         private void createTreeProgrammatically(Graph g)
         {
-            List<Char> nodes = new List<Char>();
-            List<Char> chars = new List<Char>(){Char.CABBAGE, Char.SHEEP, Char.WOLF};
+            Queue<Char> nodes = new Queue<Char>();
+            List<Char> chars = new List<Char>(){Char.CABBAGE, Char.SHEEP, Char.WOLF, Char.BOATMAN};
+            List<Char> previousNodes = new List<Char>();
 
-            Char transfer = chars.Aggregate(new Char(), (a, c) => a | c);
-            nodes.Add(transfer | Char.BOATMAN);
+            Char positions = chars.Aggregate(new Char(), (a, c) => a | c);
+            nodes.Enqueue(positions);
             int i = 0;
 
             while (nodes.Count > 0)
             {
-                foreach (Char item in chars)
+                Char current = nodes.Dequeue();
+
+                // TODO - Make other side solution
+
+                foreach (Char actor in chars)
                 {
-                    if (transfer | Char.BOATMAN)
+
+                    Char afterTransfer = transfer(actor, positions);
+                    if (!(actor == Char.BOATMAN))
                     {
-                        
+                        afterTransfer = transfer(Char.BOATMAN, afterTransfer);
                     }
-                    g.addEdge(transfer | Char.BOATMAN, item | Char.BOATMAN, i++.ToString());
+
+                    if (isDangerous(afterTransfer)) {
+                        g.addEdge(current, afterTransfer, i++.ToString());
+                        g.getVertex(afterTransfer.ToString()).Status = Constants.DANGEROUS;
+                    } else if (isRepeated(afterTransfer, previousNodes)) {
+                        g.addEdge(current, afterTransfer, i++.ToString());
+                        g.getVertex(afterTransfer.ToString()).Status = Constants.REPEATED;
+                    } else {
+                        g.addEdge(current, afterTransfer, i++.ToString());
+                        previousNodes.Add(afterTransfer);
+                        nodes.Enqueue(afterTransfer);
+                    }
                 }
             }
 
+        }
+
+        private bool isRepeated(Char situation, List<Char> moves)
+        {
+            return moves.Contains(situation);
+        }
+
+        private Char transfer(Char actor, Char positions){
+            return positions ^ actor;
         }
 
         private void createDangerousSituations()

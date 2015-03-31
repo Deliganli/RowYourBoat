@@ -26,7 +26,7 @@ namespace RowYourBoat
         public List<Edge> Adjacents;
         public Vertex Parent;
 
-        public Vertex(string name, string status = "unchecked")
+        public Vertex(string name, string status = "UNCHECKED")
         {
             Name = name;
             Status = status;
