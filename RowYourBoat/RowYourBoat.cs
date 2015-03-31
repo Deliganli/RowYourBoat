@@ -42,21 +42,28 @@ namespace RowYourBoat
 
             Char positions = chars.Aggregate(new Char(), (a, c) => a | c);
             nodes.Enqueue(positions);
+            previousNodes.Add(positions);
             int i = 0;
+            bool isBoatmanAtLeft = true;
 
             while (nodes.Count > 0)
             {
                 Char current = nodes.Dequeue();
 
-                // TODO - Make other side solution
-
-                foreach (Char actor in chars)
+                // TODO - Let graph can create same name nodes
+                
+                var available = Enum.GetValues(typeof(Char)).Cast<Enum>();
+                foreach (Char actor in available.Where((isBoatmanAtLeft ? current : ~current).HasFlag))
                 {
+                    if (actor == Char.NONE)
+                    {
+                        continue;
+                    }
 
-                    Char afterTransfer = transfer(actor, positions);
+                    Char afterTransfer = transfer(actor, current, isBoatmanAtLeft);
                     if (!(actor == Char.BOATMAN))
                     {
-                        afterTransfer = transfer(Char.BOATMAN, afterTransfer);
+                        afterTransfer = transfer(Char.BOATMAN, afterTransfer, isBoatmanAtLeft);
                     }
 
                     if (isDangerous(afterTransfer)) {
@@ -65,14 +72,24 @@ namespace RowYourBoat
                     } else if (isRepeated(afterTransfer, previousNodes)) {
                         g.addEdge(current, afterTransfer, i++.ToString());
                         g.getVertex(afterTransfer.ToString()).Status = Constants.REPEATED;
+                    } else if (isGoal(afterTransfer)) {
+                        g.addEdge(current, afterTransfer, i++.ToString());
+                        return;
                     } else {
                         g.addEdge(current, afterTransfer, i++.ToString());
                         previousNodes.Add(afterTransfer);
                         nodes.Enqueue(afterTransfer);
                     }
                 }
+
+                isBoatmanAtLeft = !isBoatmanAtLeft;
             }
 
+        }
+
+        private bool isGoal(Char afterTransfer)
+        {
+            return afterTransfer == Char.NONE;
         }
 
         private bool isRepeated(Char situation, List<Char> moves)
@@ -80,8 +97,13 @@ namespace RowYourBoat
             return moves.Contains(situation);
         }
 
-        private Char transfer(Char actor, Char positions){
-            return positions ^ actor;
+        private Char transfer(Char actor, Char positions, bool isBoatmanAtLeft){
+            if (isBoatmanAtLeft)
+            {
+                return positions ^ actor;
+            } else {
+                return positions | actor;
+            }
         }
 
         private void createDangerousSituations()
