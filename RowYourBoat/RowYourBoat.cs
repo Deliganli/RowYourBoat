@@ -25,13 +25,11 @@ namespace RowYourBoat
             createDangerousSituations();
 
             Graph g = new Graph();
-            //createTreeManually(g);
             createTreeProgrammatically(g);
             Vertex start = g.getVertex((Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE).ToString());
             Vertex end = g.getVertex(Char.NONE.ToString());
             BFS.solve(start, end);
             printSolution(g.trace(end));
-            inflatePictures();
         }
 
         private void createTreeProgrammatically(Graph g)
@@ -49,29 +47,15 @@ namespace RowYourBoat
             while (nodes.Count > 0)
             {
                 Char current = nodes.Dequeue();
-
-                // TODO - Let graph can create same name nodes
+                isBoatmanAtLeft = current.HasFlag(Char.BOATMAN);
                 
                 var available = Enum.GetValues(typeof(Char)).Cast<Enum>();
                 foreach (Char actor in available.Where((isBoatmanAtLeft ? current : ~current).HasFlag))
                 {
-                    if (actor == Char.NONE)
-                    {
-                        continue;
-                    }
-
                     Char afterTransfer = transfer(actor, current, isBoatmanAtLeft);
-                    if (!(actor == Char.BOATMAN))
-                    {
-                        afterTransfer = transfer(Char.BOATMAN, afterTransfer, isBoatmanAtLeft);
-                    }
 
-                    if (isDangerous(afterTransfer)) {
-                        g.addEdge(current, afterTransfer, i++.ToString());
-                        g.getVertex(afterTransfer.ToString()).Status = Constants.DANGEROUS;
-                    } else if (isRepeated(afterTransfer, previousNodes)) {
-                        g.addEdge(current, afterTransfer, i++.ToString());
-                        g.getVertex(afterTransfer.ToString()).Status = Constants.REPEATED;
+                    if (isDangerous(afterTransfer, isBoatmanAtLeft) || isRepeated(afterTransfer, previousNodes)) {
+
                     } else if (isGoal(afterTransfer)) {
                         g.addEdge(current, afterTransfer, i++.ToString());
                         return;
@@ -81,8 +65,6 @@ namespace RowYourBoat
                         nodes.Enqueue(afterTransfer);
                     }
                 }
-
-                isBoatmanAtLeft = !isBoatmanAtLeft;
             }
 
         }
@@ -97,7 +79,20 @@ namespace RowYourBoat
             return moves.Contains(situation);
         }
 
+        private bool isDangerous(Char current, bool a)
+        {
+            Char currentRelativeToBoatman = a ? current : ~current;
+            return dangerous.Any(situation =>
+                currentRelativeToBoatman.HasFlag(situation) &&
+                !currentRelativeToBoatman.HasFlag(Char.BOATMAN));
+        }
+
         private Char transfer(Char actor, Char positions, bool isBoatmanAtLeft){
+            if (!(actor == Char.BOATMAN))
+            {
+                positions = transfer(Char.BOATMAN, positions, isBoatmanAtLeft);
+            }
+
             if (isBoatmanAtLeft)
             {
                 return positions ^ actor;
@@ -113,17 +108,6 @@ namespace RowYourBoat
             dangerous.Add(Char.WOLF | Char.SHEEP);
         }
 
-        private bool isDangerous(Char current)
-        {
-            return dangerous.Any(situation => current.HasFlag(situation) && !current.HasFlag(Char.BOATMAN));
-        }
-
-        private void inflatePictures()
-        {
-            pbWolf.ImageLocation = "../coyote.png";
-            pbWolf.SizeMode = PictureBoxSizeMode.CenterImage;
-        }
-
         private void printSolution(List<Vertex> solution)
         {
             foreach (Vertex v in solution)
@@ -131,30 +115,5 @@ namespace RowYourBoat
                 lblInfo.Text += v.Name + Environment.NewLine;
             }
         }
-
-        private void createTreeManually(Graph g)
-        {
-            g.addEdge(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE,
-                Char.CABBAGE | Char.WOLF, "1");
-            g.addEdge(Char.CABBAGE | Char.WOLF,
-                Char.BOATMAN | Char.CABBAGE | Char.WOLF, "2");
-            g.addEdge(Char.BOATMAN | Char.CABBAGE | Char.WOLF,
-                Char.WOLF, "3");
-            g.addEdge(Char.BOATMAN | Char.CABBAGE | Char.WOLF,
-                Char.CABBAGE, "4");
-            g.addEdge(Char.WOLF,
-                Char.BOATMAN | Char.SHEEP | Char.WOLF, "5");
-            g.addEdge(Char.BOATMAN | Char.SHEEP | Char.WOLF,
-                Char.SHEEP, "6");
-            g.addEdge(Char.CABBAGE,
-                Char.BOATMAN | Char.CABBAGE | Char.SHEEP, "7");
-            g.addEdge(Char.BOATMAN | Char.CABBAGE | Char.SHEEP,
-                Char.SHEEP, "8");
-            g.addEdge(Char.SHEEP,
-                Char.BOATMAN | Char.SHEEP, "9");
-            g.addEdge(Char.BOATMAN | Char.SHEEP,
-                Char.NONE, "10");
-        }
-
     }
 }
