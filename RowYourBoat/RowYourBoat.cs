@@ -53,8 +53,7 @@ namespace RowYourBoat
                 isBoatmanAtLeft = current.HasFlag(Char.BOATMAN);
                 
                 var available = Enum.GetValues(typeof(Char)).Cast<Enum>();
-                foreach (Char actor in available.Where((isBoatmanAtLeft ? current : ~current).HasFlag))
-                {
+                foreach (Char actor in available.Where((isBoatmanAtLeft ? current : ~current).HasFlag)) {
                     Char afterTransfer = transfer(actor, current, isBoatmanAtLeft);
 
                     if (isDangerous(afterTransfer, isBoatmanAtLeft) || isRepeated(afterTransfer, previousNodes)) {
@@ -91,13 +90,11 @@ namespace RowYourBoat
         }
 
         private Char transfer(Char actor, Char positions, bool isBoatmanAtLeft){
-            if (!(actor == Char.BOATMAN))
-            {
+            if (!(actor == Char.BOATMAN)) {
                 positions = transfer(Char.BOATMAN, positions, isBoatmanAtLeft);
             }
 
-            if (isBoatmanAtLeft)
-            {
+            if (isBoatmanAtLeft) {
                 return positions ^ actor;
             } else {
                 return positions | actor;
@@ -113,8 +110,7 @@ namespace RowYourBoat
 
         private void printSolution(List<Vertex> solution)
         {
-            foreach (Vertex v in solution)
-            {
+            foreach (Vertex v in solution) {
                 lblInfo.Text += v.Name + Environment.NewLine;
             }
         }
@@ -124,8 +120,7 @@ namespace RowYourBoat
             List<Vertex> moves = g.trace(g.getVertex(Char.NONE));
 
             List<Char> passangers = new List<Char>();
-            for (int i = 0; i < moves.Count - 1; i++)
-            {
+            for (int i = 0; i < moves.Count - 1; i++) {
                 passangers.Add(moves[i].Chars ^ moves[i + 1].Chars);
             }
 
@@ -141,8 +136,7 @@ namespace RowYourBoat
             int difference = gbChars.Right - 130; ;
 
             // TODO - Disgusting, make it nicer
-            foreach (var turn in passangers)
-            {
+            foreach (var turn in passangers) {
                 difference = side ? Math.Abs(difference) : Math.Abs(difference) * - 1;
 
 		        if (turn.HasFlag(Char.BOATMAN)) {
