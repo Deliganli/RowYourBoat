@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using RowYourBoat.Tree;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace RowYourBoat
 {
@@ -26,6 +27,7 @@ namespace RowYourBoat
         {
             lblInfo.Text = String.Empty;
             createDangerousSituations();
+            inflatePictures();
 
             g = new Graph();
             createTreeProgrammatically(g);
@@ -33,6 +35,21 @@ namespace RowYourBoat
             Vertex end = g.getVertex(Char.NONE);
             BFS.solve(start, end);
             printSolution(g.trace(end));
+        }
+
+        private void inflatePictures()
+        {
+            string basePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            pbCabbage.ImageLocation = basePath + "\\Resources\\seed.png";
+            pbCabbage.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbSheep.ImageLocation = basePath + "\\Resources\\roadrunner.png";
+            pbSheep.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbWolf.ImageLocation = basePath + "\\Resources\\coyote.png";
+            pbWolf.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbBoatman.ImageLocation = basePath + "\\Resources\\alakasiz.jpg";
+            pbBoatman.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbBoat.ImageLocation = basePath + "\\Resources\\boat.png";
+            pbBoat.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void createTreeProgrammatically(Graph g)
@@ -135,7 +152,6 @@ namespace RowYourBoat
             bool side = true;
             int difference = gbChars.Right - 130; ;
 
-            // TODO - Disgusting, make it nicer
             foreach (var turn in passangers) {
                 difference = side ? Math.Abs(difference) : Math.Abs(difference) * - 1;
 

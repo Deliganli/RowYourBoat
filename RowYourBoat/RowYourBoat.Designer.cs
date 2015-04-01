@@ -53,7 +53,7 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(563, 21);
+            this.lblInfo.Location = new System.Drawing.Point(454, 335);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(35, 13);
             this.lblInfo.TabIndex = 0;
@@ -63,39 +63,39 @@
             // 
             this.pbWolf.Location = new System.Drawing.Point(21, 21);
             this.pbWolf.Name = "pbWolf";
-            this.pbWolf.Size = new System.Drawing.Size(100, 50);
+            this.pbWolf.Size = new System.Drawing.Size(78, 93);
             this.pbWolf.TabIndex = 1;
             this.pbWolf.TabStop = false;
             // 
             // pbCabbage
             // 
-            this.pbCabbage.Location = new System.Drawing.Point(21, 133);
+            this.pbCabbage.Location = new System.Drawing.Point(21, 217);
             this.pbCabbage.Name = "pbCabbage";
-            this.pbCabbage.Size = new System.Drawing.Size(100, 50);
+            this.pbCabbage.Size = new System.Drawing.Size(78, 102);
             this.pbCabbage.TabIndex = 2;
             this.pbCabbage.TabStop = false;
             // 
             // pbSheep
             // 
-            this.pbSheep.Location = new System.Drawing.Point(21, 77);
+            this.pbSheep.Location = new System.Drawing.Point(21, 120);
             this.pbSheep.Name = "pbSheep";
-            this.pbSheep.Size = new System.Drawing.Size(100, 50);
+            this.pbSheep.Size = new System.Drawing.Size(78, 91);
             this.pbSheep.TabIndex = 3;
             this.pbSheep.TabStop = false;
             // 
             // pbBoatman
             // 
-            this.pbBoatman.Location = new System.Drawing.Point(127, 77);
+            this.pbBoatman.Location = new System.Drawing.Point(338, 94);
             this.pbBoatman.Name = "pbBoatman";
-            this.pbBoatman.Size = new System.Drawing.Size(100, 50);
+            this.pbBoatman.Size = new System.Drawing.Size(78, 59);
             this.pbBoatman.TabIndex = 4;
             this.pbBoatman.TabStop = false;
             // 
             // pbBoat
             // 
-            this.pbBoat.Location = new System.Drawing.Point(127, 133);
+            this.pbBoat.Location = new System.Drawing.Point(218, 159);
             this.pbBoat.Name = "pbBoat";
-            this.pbBoat.Size = new System.Drawing.Size(100, 50);
+            this.pbBoat.Size = new System.Drawing.Size(198, 120);
             this.pbBoat.TabIndex = 5;
             this.pbBoat.TabStop = false;
             // 
@@ -103,7 +103,7 @@
             // 
             this.pbBackground.Location = new System.Drawing.Point(21, 21);
             this.pbBackground.Name = "pbBackground";
-            this.pbBackground.Size = new System.Drawing.Size(536, 162);
+            this.pbBackground.Size = new System.Drawing.Size(747, 298);
             this.pbBackground.TabIndex = 6;
             this.pbBackground.TabStop = false;
             // 
@@ -159,7 +159,7 @@
             this.gbChars.Controls.Add(this.lblBoatman);
             this.gbChars.Controls.Add(this.lblSheep);
             this.gbChars.Controls.Add(this.lblCabbage);
-            this.gbChars.Location = new System.Drawing.Point(21, 255);
+            this.gbChars.Location = new System.Drawing.Point(21, 325);
             this.gbChars.Name = "gbChars";
             this.gbChars.Size = new System.Drawing.Size(427, 147);
             this.gbChars.TabIndex = 12;
