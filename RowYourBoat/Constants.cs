@@ -7,8 +7,8 @@ namespace RowYourBoat
 {
     class Constants
     {
-        public static string UNCHECKED = "UNCHECKED";
+        public static readonly string UNCHECKED = "UNCHECKED";
 
-        public static string DISCOVERED = "DISCOVERED";
+        public static readonly string DISCOVERED = "DISCOVERED";
     }
 }

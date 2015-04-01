@@ -25,10 +25,12 @@ namespace RowYourBoat
         public string Status;
         public List<Edge> Adjacents;
         public Vertex Parent;
+        public Char Chars;
 
-        public Vertex(string name, string status = "UNCHECKED")
+        public Vertex(Char chars, string status = "UNCHECKED")
         {
-            Name = name;
+            Name = chars.ToString();
+            Chars = chars;
             Status = status;
             Parent = null;
             Adjacents = new List<Edge>();
@@ -41,19 +43,19 @@ namespace RowYourBoat
 
         public void addEdge(Char source, Char dest, string name)
         {
-            Vertex v = getVertex(source.ToString());
-            Vertex w = getVertex(dest.ToString());
+            Vertex v = getVertex(source);
+            Vertex w = getVertex(dest);
             v.Adjacents.Add(new Edge(w, name));
         }
 
-        public Vertex getVertex(string vertexname)
+        public Vertex getVertex(Char vertexname)
         {
             Vertex v;
-            vertexmap.TryGetValue(vertexname, out v);
+            vertexmap.TryGetValue(vertexname.ToString(), out v);
             if (v == null)
             {
                 v = new Vertex(vertexname);
-                vertexmap.Add(vertexname, v);
+                vertexmap.Add(vertexname.ToString(), v);
             }
             return v;
         }
@@ -62,13 +64,11 @@ namespace RowYourBoat
         {
             List<Vertex> list = new List<Vertex>() { dest };
 
-            do
-            {
+            do {
                 list.Add(dest.Parent);
                 dest = dest.Parent;
             } while (dest.Parent != null);
 
-            //from source to destination
             list.Reverse();
             return list;
         }

@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using RowYourBoat.Tree;
+using System.Threading.Tasks;
 
 namespace RowYourBoat
 {
     public partial class RowYourBoat : Form
     {
         List<Char> dangerous;
+
+        Graph g;
 
         public RowYourBoat()
         {
@@ -24,10 +27,10 @@ namespace RowYourBoat
             lblInfo.Text = String.Empty;
             createDangerousSituations();
 
-            Graph g = new Graph();
+            g = new Graph();
             createTreeProgrammatically(g);
-            Vertex start = g.getVertex((Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE).ToString());
-            Vertex end = g.getVertex(Char.NONE.ToString());
+            Vertex start = g.getVertex(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE);
+            Vertex end = g.getVertex(Char.NONE);
             BFS.solve(start, end);
             printSolution(g.trace(end));
         }
@@ -114,6 +117,48 @@ namespace RowYourBoat
             {
                 lblInfo.Text += v.Name + Environment.NewLine;
             }
+        }
+
+        private List<Char> retreiveTransportationTurns()
+        {
+            List<Vertex> moves = g.trace(g.getVertex(Char.NONE));
+
+            List<Char> passangers = new List<Char>();
+            for (int i = 0; i < moves.Count - 1; i++)
+            {
+                passangers.Add(moves[i].Chars ^ moves[i + 1].Chars);
+            }
+
+            return passangers;
+        }
+
+        private async void btnNext_Click(object sender, EventArgs e)
+        {
+            btnNext.Enabled = false;
+            var passangers = retreiveTransportationTurns();
+
+            bool side = true;
+            int difference = gbChars.Right - 130; ;
+
+            // TODO - Disgusting, make it nicer
+            foreach (var turn in passangers)
+            {
+                difference = side ? Math.Abs(difference) : Math.Abs(difference) * - 1;
+
+		        if (turn.HasFlag(Char.BOATMAN)) {
+                    lblBoatman.Left += difference;
+                } if (turn.HasFlag(Char.WOLF)) {
+                    lblWolf.Left += difference;
+                } if (turn.HasFlag(Char.SHEEP)) {
+                    lblSheep.Left += difference;
+                } if (turn.HasFlag(Char.CABBAGE)) {
+                    lblCabbage.Left += difference;
+                }
+                side = !side;
+                await TaskEx.Delay(1000);
+            }
+
+            btnNext.Enabled = true;
         }
     }
 }
