@@ -38,6 +38,8 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.btnDFS = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSpace = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pImages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCabbage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoatman)).BeginInit();
@@ -45,10 +47,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbSheep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBackground)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBFS
             // 
+            this.btnBFS.Enabled = false;
             this.btnBFS.Location = new System.Drawing.Point(6, 19);
             this.btnBFS.Name = "btnBFS";
             this.btnBFS.Size = new System.Drawing.Size(86, 41);
@@ -124,12 +128,13 @@
             this.lblInfo.AutoSize = true;
             this.lblInfo.Location = new System.Drawing.Point(12, 354);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(35, 13);
+            this.lblInfo.Size = new System.Drawing.Size(52, 13);
             this.lblInfo.TabIndex = 15;
-            this.lblInfo.Text = "label1";
+            this.lblInfo.Text = "Left Side:";
             // 
             // btnDFS
             // 
+            this.btnDFS.Enabled = false;
             this.btnDFS.Location = new System.Drawing.Point(6, 66);
             this.btnDFS.Name = "btnDFS";
             this.btnDFS.Size = new System.Drawing.Size(86, 41);
@@ -142,18 +147,39 @@
             // 
             this.groupBox1.Controls.Add(this.btnBFS);
             this.groupBox1.Controls.Add(this.btnDFS);
-            this.groupBox1.Location = new System.Drawing.Point(671, 354);
+            this.groupBox1.Location = new System.Drawing.Point(774, 85);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(97, 115);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Solve with";
             // 
+            // btnSpace
+            // 
+            this.btnSpace.Location = new System.Drawing.Point(6, 19);
+            this.btnSpace.Name = "btnSpace";
+            this.btnSpace.Size = new System.Drawing.Size(86, 41);
+            this.btnSpace.TabIndex = 17;
+            this.btnSpace.Text = "Create State Space";
+            this.btnSpace.UseVisualStyleBackColor = true;
+            this.btnSpace.Click += new System.EventHandler(this.btnSpace_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnSpace);
+            this.groupBox2.Location = new System.Drawing.Point(774, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(97, 67);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "State Space";
+            // 
             // RowYourBoat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 538);
+            this.ClientSize = new System.Drawing.Size(881, 538);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.pImages);
@@ -167,6 +193,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbSheep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBackground)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,6 +211,8 @@
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Button btnDFS;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnSpace;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

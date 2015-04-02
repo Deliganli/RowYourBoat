@@ -43,8 +43,6 @@ namespace RowYourBoat
             pbBoatman.BackColor = Color.Transparent;
         }
 
-        
-
         public void transfer(PictureBox pb)
         {
             bool isLeft = isAtLeft(pb);

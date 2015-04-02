@@ -63,12 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Char.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="ImageController.cs" />
+    <Compile Include="Util\Char.cs" />
+    <Compile Include="Util\Constants.cs" />
+    <Compile Include="Util\ImageController.cs" />
     <Compile Include="Solution\AI.cs" />
     <Compile Include="Solution\DFS.cs" />
-    <Compile Include="Tree\Graph.cs" />
+    <Compile Include="Solution\Graph.cs" />
     <Compile Include="Solution\BFS.cs" />
     <Compile Include="RowYourBoat.cs">
       <SubType>Form</SubType>

@@ -27,7 +27,7 @@ namespace RowYourBoat
 
         private void RowYourBoat_Load(object sender, EventArgs e)
         {
-            lblInfo.Text = string.Empty;
+            lblInfo.Text += Environment.NewLine;
             imageController = new ImageController(pbWolf, pbSheep, pbCabbage, pbBoatman, pbBackground, pImages);
         }
 
@@ -45,20 +45,14 @@ namespace RowYourBoat
 
         private void btnBFS_Click(object sender, EventArgs e)
         {
-            AI ai = new AI();
-            g = ai.createTree();
             Vertex start = g.getVertex(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE);
             Vertex end = g.getVertex(Char.NONE);
             BFS.solve(start, end);
             demonstrate();
         }
 
-
-
         private void btnDFS_Click(object sender, EventArgs e)
         {
-            AI ai = new AI();
-            g = ai.createTree();
             Vertex start = g.getVertex(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE);
             Vertex end = g.getVertex(Char.NONE);
             DFS.solve(start, end);
@@ -71,24 +65,25 @@ namespace RowYourBoat
             btnDFS.Enabled = false;
             var passangers = retreiveTransportationTurns();
 
-            foreach (var turn in passangers)
-            {
-                if (turn.HasFlag(Char.BOATMAN))
-                {
+            foreach (var turn in passangers) {
+                if (turn.HasFlag(Char.BOATMAN)) {
                     imageController.transfer(pbBoatman);
-                } if (turn.HasFlag(Char.WOLF))
-                {
+                } if (turn.HasFlag(Char.WOLF)) {
                     imageController.transfer(pbWolf);
-                } if (turn.HasFlag(Char.SHEEP))
-                {
+                } if (turn.HasFlag(Char.SHEEP)) {
                     imageController.transfer(pbSheep);
-                } if (turn.HasFlag(Char.CABBAGE))
-                {
+                } if (turn.HasFlag(Char.CABBAGE)) {
                     imageController.transfer(pbCabbage);
                 }
                 await TaskEx.Delay(1000);
             }
+        }
 
+        private void btnSpace_Click(object sender, EventArgs e)
+        {
+            lblInfo.Text = "Left Side:" + Environment.NewLine;
+            AI ai = new AI();
+            g = ai.createTree(lblInfo);
             btnBFS.Enabled = true;
             btnDFS.Enabled = true;
         }

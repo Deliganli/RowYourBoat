@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace RowYourBoat.Solution
 {
     class AI
     {
-        public Graph createTree()
+        public Graph createTree(Label lbl)
         {
             Graph g = new Graph();
             List<Char> dangerous = createDangerousSituations();
@@ -30,23 +31,27 @@ namespace RowYourBoat.Solution
                 var available = Enum.GetValues(typeof(Char)).Cast<Enum>();
                 foreach (Char actor in available.Where((isBoatmanAtLeft ? current : ~current).HasFlag))
                 {
+                    if (actor == Char.NONE) {
+                        continue;
+                    }
                     Char afterTransfer = transfer(actor, current, isBoatmanAtLeft);
 
                     if (isDangerous(dangerous, afterTransfer, isBoatmanAtLeft)) {
-                        //g.addEdge(current, afterTransfer, i++.ToString());
-                        //g.getVertex(afterTransfer).Status = Constants.DANGEROUS;
+                        lbl.Text += afterTransfer.ToString() + " is " + Constants.DANGEROUS + "---";
                     } else if (isRepeated(afterTransfer, previousNodes)) {
-                        //g.addEdge(current, afterTransfer, i++.ToString());
-                        //g.getVertex(afterTransfer).Status = Constants.REPEATED;
+                        lbl.Text += afterTransfer.ToString() + " is " + Constants.REPEATED + "---";
                     } else if (isGoal(afterTransfer)) {
                         g.addEdge(current, afterTransfer, i++.ToString());
+                        lbl.Text += afterTransfer.ToString() + " is " + "GOAL" + "---";
                         return g;
                     } else {
                         g.addEdge(current, afterTransfer, i++.ToString());
                         previousNodes.Add(afterTransfer);
                         nodes.Enqueue(afterTransfer);
+                        lbl.Text += afterTransfer.ToString() + " is " + Constants.UNCHECKED + "---";
                     }
                 }
+                lbl.Text += Environment.NewLine;
             }
 
             return g;
@@ -62,17 +67,13 @@ namespace RowYourBoat.Solution
 
         private Char transfer(Char actor, Char positions, bool isBoatmanAtLeft)
         {
-            if (!(actor == Char.BOATMAN))
-            {
+            if (!(actor == Char.BOATMAN)) {
                 positions = transfer(Char.BOATMAN, positions, isBoatmanAtLeft);
             }
 
-            if (isBoatmanAtLeft)
-            {
+            if (isBoatmanAtLeft) {
                 return positions ^ actor;
-            }
-            else
-            {
+            } else {
                 return positions | actor;
             }
         }

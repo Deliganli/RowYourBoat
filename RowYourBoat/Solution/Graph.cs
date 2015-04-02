@@ -23,6 +23,7 @@ namespace RowYourBoat
     {
         public string Name;
         public string Status;
+        public string Situation;
         public List<Edge> Adjacents;
         public Vertex Parent;
         public Char Chars;
@@ -32,6 +33,7 @@ namespace RowYourBoat
             Name = chars.ToString();
             Chars = chars;
             Status = status;
+            Situation = Constants.UNCHECKED;
             Parent = null;
             Adjacents = new List<Edge>();
         }
