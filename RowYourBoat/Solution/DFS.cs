@@ -13,7 +13,6 @@ namespace RowYourBoat.Tree
         {
             Stack<Vertex> solution = new Stack<Vertex>();
             solution.Push(vSource);
-            //vSource.Status = DISCOVERED;
             while (solution.Count > 0)
             {
                 Vertex current = solution.Pop();
@@ -23,6 +22,7 @@ namespace RowYourBoat.Tree
                     foreach (Edge prime in current.Adjacents)
                     {
                         solution.Push(prime.Destination);
+                        prime.Destination.Parent = current;
                     }
                 }
             }//end-while

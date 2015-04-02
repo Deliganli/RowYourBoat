@@ -10,5 +10,9 @@ namespace RowYourBoat
         public static readonly string UNCHECKED = "UNCHECKED";
 
         public static readonly string DISCOVERED = "DISCOVERED";
+
+        public static readonly string DANGEROUS = "DANGEROUS";
+
+        public static readonly string REPEATED = "REPEATED";
     }
 }

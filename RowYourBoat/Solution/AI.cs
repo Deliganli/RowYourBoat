@@ -32,18 +32,16 @@ namespace RowYourBoat.Solution
                 {
                     Char afterTransfer = transfer(actor, current, isBoatmanAtLeft);
 
-                    if (isDangerous(dangerous, afterTransfer, isBoatmanAtLeft) ||
-                        isRepeated(afterTransfer, previousNodes))
-                    {
-
-                    }
-                    else if (isGoal(afterTransfer))
-                    {
+                    if (isDangerous(dangerous, afterTransfer, isBoatmanAtLeft)) {
+                        //g.addEdge(current, afterTransfer, i++.ToString());
+                        //g.getVertex(afterTransfer).Status = Constants.DANGEROUS;
+                    } else if (isRepeated(afterTransfer, previousNodes)) {
+                        //g.addEdge(current, afterTransfer, i++.ToString());
+                        //g.getVertex(afterTransfer).Status = Constants.REPEATED;
+                    } else if (isGoal(afterTransfer)) {
                         g.addEdge(current, afterTransfer, i++.ToString());
                         return g;
-                    }
-                    else
-                    {
+                    } else {
                         g.addEdge(current, afterTransfer, i++.ToString());
                         previousNodes.Add(afterTransfer);
                         nodes.Enqueue(afterTransfer);

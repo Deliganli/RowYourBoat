@@ -27,13 +27,8 @@ namespace RowYourBoat
 
         private void RowYourBoat_Load(object sender, EventArgs e)
         {
+            lblInfo.Text = string.Empty;
             imageController = new ImageController(pbWolf, pbSheep, pbCabbage, pbBoatman, pbBackground, pImages);
-
-            AI ai = new AI();
-            g = ai.createTree();
-            Vertex start = g.getVertex(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE);
-            Vertex end = g.getVertex(Char.NONE);
-            BFS.solve(start, end);
         }
 
         private List<Char> retreiveTransportationTurns()
@@ -48,25 +43,54 @@ namespace RowYourBoat
             return passangers;
         }
 
-        private async void btnNext_Click(object sender, EventArgs e)
+        private void btnBFS_Click(object sender, EventArgs e)
         {
-            btnNext.Enabled = false;
+            AI ai = new AI();
+            g = ai.createTree();
+            Vertex start = g.getVertex(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE);
+            Vertex end = g.getVertex(Char.NONE);
+            BFS.solve(start, end);
+            demonstrate();
+        }
+
+
+
+        private void btnDFS_Click(object sender, EventArgs e)
+        {
+            AI ai = new AI();
+            g = ai.createTree();
+            Vertex start = g.getVertex(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE);
+            Vertex end = g.getVertex(Char.NONE);
+            DFS.solve(start, end);
+            demonstrate();
+        }
+
+        private async void demonstrate()
+        {
+            btnBFS.Enabled = false;
+            btnDFS.Enabled = false;
             var passangers = retreiveTransportationTurns();
 
-            foreach (var turn in passangers) {
-		        if (turn.HasFlag(Char.BOATMAN)) {
+            foreach (var turn in passangers)
+            {
+                if (turn.HasFlag(Char.BOATMAN))
+                {
                     imageController.transfer(pbBoatman);
-                } if (turn.HasFlag(Char.WOLF)) {
+                } if (turn.HasFlag(Char.WOLF))
+                {
                     imageController.transfer(pbWolf);
-                } if (turn.HasFlag(Char.SHEEP)) {
+                } if (turn.HasFlag(Char.SHEEP))
+                {
                     imageController.transfer(pbSheep);
-                } if (turn.HasFlag(Char.CABBAGE)) {
+                } if (turn.HasFlag(Char.CABBAGE))
+                {
                     imageController.transfer(pbCabbage);
                 }
                 await TaskEx.Delay(1000);
             }
 
-            btnNext.Enabled = true;
+            btnBFS.Enabled = true;
+            btnDFS.Enabled = true;
         }
     }
 }

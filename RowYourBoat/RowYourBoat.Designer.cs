@@ -28,30 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnNext = new System.Windows.Forms.Button();
+            this.btnBFS = new System.Windows.Forms.Button();
             this.pImages = new System.Windows.Forms.Panel();
+            this.pbCabbage = new System.Windows.Forms.PictureBox();
             this.pbBoatman = new System.Windows.Forms.PictureBox();
             this.pbWolf = new System.Windows.Forms.PictureBox();
             this.pbSheep = new System.Windows.Forms.PictureBox();
-            this.pbCabbage = new System.Windows.Forms.PictureBox();
             this.pbBackground = new System.Windows.Forms.PictureBox();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.btnDFS = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pImages.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCabbage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoatman)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbWolf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSheep)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCabbage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBackground)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnNext
+            // btnBFS
             // 
-            this.btnNext.Location = new System.Drawing.Point(682, 354);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(86, 41);
-            this.btnNext.TabIndex = 7;
-            this.btnNext.Text = "Demonstrate";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            this.btnBFS.Location = new System.Drawing.Point(6, 19);
+            this.btnBFS.Name = "btnBFS";
+            this.btnBFS.Size = new System.Drawing.Size(86, 41);
+            this.btnBFS.TabIndex = 7;
+            this.btnBFS.Text = "Breadth-First Search";
+            this.btnBFS.UseVisualStyleBackColor = true;
+            this.btnBFS.Click += new System.EventHandler(this.btnBFS_Click);
             // 
             // pImages
             // 
@@ -64,6 +68,16 @@
             this.pImages.Name = "pImages";
             this.pImages.Size = new System.Drawing.Size(756, 336);
             this.pImages.TabIndex = 14;
+            // 
+            // pbCabbage
+            // 
+            this.pbCabbage.Image = global::RowYourBoat.Properties.Resources.seed;
+            this.pbCabbage.Location = new System.Drawing.Point(165, 214);
+            this.pbCabbage.Name = "pbCabbage";
+            this.pbCabbage.Size = new System.Drawing.Size(60, 50);
+            this.pbCabbage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCabbage.TabIndex = 2;
+            this.pbCabbage.TabStop = false;
             // 
             // pbBoatman
             // 
@@ -95,16 +109,6 @@
             this.pbSheep.TabIndex = 3;
             this.pbSheep.TabStop = false;
             // 
-            // pbCabbage
-            // 
-            this.pbCabbage.Image = global::RowYourBoat.Properties.Resources.seed;
-            this.pbCabbage.Location = new System.Drawing.Point(165, 214);
-            this.pbCabbage.Name = "pbCabbage";
-            this.pbCabbage.Size = new System.Drawing.Size(60, 50);
-            this.pbCabbage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbCabbage.TabIndex = 2;
-            this.pbCabbage.TabStop = false;
-            // 
             // pbBackground
             // 
             this.pbBackground.Image = global::RowYourBoat.Properties.Resources.river;
@@ -115,35 +119,71 @@
             this.pbBackground.TabIndex = 6;
             this.pbBackground.TabStop = false;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(12, 354);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(35, 13);
+            this.lblInfo.TabIndex = 15;
+            this.lblInfo.Text = "label1";
+            // 
+            // btnDFS
+            // 
+            this.btnDFS.Location = new System.Drawing.Point(6, 66);
+            this.btnDFS.Name = "btnDFS";
+            this.btnDFS.Size = new System.Drawing.Size(86, 41);
+            this.btnDFS.TabIndex = 16;
+            this.btnDFS.Text = "Depth-First Search";
+            this.btnDFS.UseVisualStyleBackColor = true;
+            this.btnDFS.Click += new System.EventHandler(this.btnDFS_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnBFS);
+            this.groupBox1.Controls.Add(this.btnDFS);
+            this.groupBox1.Location = new System.Drawing.Point(671, 354);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(97, 115);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Solve with";
+            // 
             // RowYourBoat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 538);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.pImages);
-            this.Controls.Add(this.btnNext);
             this.Name = "RowYourBoat";
             this.Text = "Row Your Boat";
             this.Load += new System.EventHandler(this.RowYourBoat_Load);
             this.pImages.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbCabbage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoatman)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbWolf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSheep)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCabbage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBackground)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnBFS;
         private System.Windows.Forms.PictureBox pbBackground;
         private System.Windows.Forms.PictureBox pbSheep;
         private System.Windows.Forms.PictureBox pbCabbage;
         private System.Windows.Forms.PictureBox pbWolf;
         private System.Windows.Forms.PictureBox pbBoatman;
         private System.Windows.Forms.Panel pImages;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnDFS;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
