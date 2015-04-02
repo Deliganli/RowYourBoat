@@ -18,17 +18,17 @@ namespace RowYourBoat
         private PictureBox pbBoat;
         private PictureBox pbBackground;
 
-        private GroupBox gbImages;
+        private Panel pImages;
 
         public ImageController(PictureBox wolf, PictureBox sheep, PictureBox cabbage,
-                            PictureBox boatman, PictureBox background, GroupBox images)
+                            PictureBox boatman, PictureBox background, Panel images)
         {
             this.pbWolf = wolf;
             this.pbSheep = sheep;
             this.pbCabbage = cabbage;
             this.pbBoatman = boatman;
             this.pbBackground = background;
-            this.gbImages = images;
+            this.pImages = images;
         }
 
         public void inflatePictures()
@@ -57,17 +57,17 @@ namespace RowYourBoat
 
         private bool isAtLeft(PictureBox pb)
         {
-            return pb.Left - gbImages.Left <= gbImages.Right - pb.Right;
+            return pb.Left - pImages.Left <= pImages.Right - pb.Right;
         }
 
         private void move(PictureBox pb, bool direction)
         {
             if (direction) {
-                int leftDistance = pb.Left - gbImages.Left;
-                pb.Left = gbImages.Right - leftDistance - pb.Width;
+                int leftDistance = pb.Left - pImages.Left;
+                pb.Left = pImages.Right - leftDistance - pb.Width;
             } else {
-                int rightDistance = gbImages.Right - pb.Right;
-                pb.Left = gbImages.Left + rightDistance;
+                int rightDistance = pImages.Right - pb.Right;
+                pb.Left = pImages.Left + rightDistance;
             }
         }
 

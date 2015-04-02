@@ -28,7 +28,7 @@ namespace RowYourBoat
         private void RowYourBoat_Load(object sender, EventArgs e)
         {
             lblInfo.Text = String.Empty;
-            imageController = new ImageController(pbWolf, pbSheep, pbCabbage, pbBoatman, pbBackground, gbImages);
+            imageController = new ImageController(pbWolf, pbSheep, pbCabbage, pbBoatman, pbBackground, pImages);
             imageController.inflatePictures();
 
             AI ai = new AI();
