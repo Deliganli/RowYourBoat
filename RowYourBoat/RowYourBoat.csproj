@@ -66,9 +66,10 @@
     <Compile Include="Char.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ImageController.cs" />
-    <Compile Include="Tree\DFS.cs" />
+    <Compile Include="Solution\AI.cs" />
+    <Compile Include="Solution\DFS.cs" />
     <Compile Include="Tree\Graph.cs" />
-    <Compile Include="Tree\BFS.cs" />
+    <Compile Include="Solution\BFS.cs" />
     <Compile Include="RowYourBoat.cs">
       <SubType>Form</SubType>
     </Compile>

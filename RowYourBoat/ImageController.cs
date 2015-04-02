@@ -21,14 +21,12 @@ namespace RowYourBoat
         private GroupBox gbImages;
 
         public ImageController(PictureBox wolf, PictureBox sheep, PictureBox cabbage,
-                            PictureBox boatman, PictureBox boat, PictureBox background,
-                            GroupBox images)
+                            PictureBox boatman, PictureBox background, GroupBox images)
         {
             this.pbWolf = wolf;
             this.pbSheep = sheep;
             this.pbCabbage = cabbage;
             this.pbBoatman = boatman;
-            this.pbBoat = boat;
             this.pbBackground = background;
             this.gbImages = images;
         }
@@ -49,7 +47,6 @@ namespace RowYourBoat
             pbSheep.SizeMode = sizeMode;
             pbWolf.SizeMode = sizeMode;
             pbBoatman.SizeMode = sizeMode;
-            pbBoat.SizeMode = sizeMode;
         }
 
         public void transfer(PictureBox pb)
