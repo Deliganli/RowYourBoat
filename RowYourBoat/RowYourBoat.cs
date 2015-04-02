@@ -18,6 +18,8 @@ namespace RowYourBoat
 
         Graph g;
 
+        ImageController imageController;
+
         public RowYourBoat()
         {
             InitializeComponent();
@@ -26,30 +28,16 @@ namespace RowYourBoat
         private void RowYourBoat_Load(object sender, EventArgs e)
         {
             lblInfo.Text = String.Empty;
-            createDangerousSituations();
-            inflatePictures();
+            imageController = new ImageController(pbWolf, pbSheep, pbCabbage, pbBoatman, pbBoat, pbBackground, gbImages);
+            imageController.inflatePictures();
 
+            dangerous = createDangerousSituations();
             g = new Graph();
             createTreeProgrammatically(g);
             Vertex start = g.getVertex(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE);
             Vertex end = g.getVertex(Char.NONE);
             BFS.solve(start, end);
             printSolution(g.trace(end));
-        }
-
-        private void inflatePictures()
-        {
-            string basePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            pbCabbage.ImageLocation = basePath + "\\Resources\\seed.png";
-            pbCabbage.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbSheep.ImageLocation = basePath + "\\Resources\\roadrunner.png";
-            pbSheep.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbWolf.ImageLocation = basePath + "\\Resources\\coyote.png";
-            pbWolf.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbBoatman.ImageLocation = basePath + "\\Resources\\alakasiz.jpg";
-            pbBoatman.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbBoat.ImageLocation = basePath + "\\Resources\\boat.png";
-            pbBoat.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void createTreeProgrammatically(Graph g)
@@ -118,11 +106,12 @@ namespace RowYourBoat
             }
         }
 
-        private void createDangerousSituations()
+        private List<Char> createDangerousSituations()
         {
             dangerous = new List<Char> { };
             dangerous.Add(Char.SHEEP | Char.CABBAGE);
             dangerous.Add(Char.WOLF | Char.SHEEP);
+            return dangerous;
         }
 
         private void printSolution(List<Vertex> solution)
@@ -149,22 +138,16 @@ namespace RowYourBoat
             btnNext.Enabled = false;
             var passangers = retreiveTransportationTurns();
 
-            bool side = true;
-            int difference = gbChars.Right - 130; ;
-
             foreach (var turn in passangers) {
-                difference = side ? Math.Abs(difference) : Math.Abs(difference) * - 1;
-
 		        if (turn.HasFlag(Char.BOATMAN)) {
-                    lblBoatman.Left += difference;
+                    imageController.transfer(pbBoatman);
                 } if (turn.HasFlag(Char.WOLF)) {
-                    lblWolf.Left += difference;
+                    imageController.transfer(pbWolf);
                 } if (turn.HasFlag(Char.SHEEP)) {
-                    lblSheep.Left += difference;
+                    imageController.transfer(pbSheep);
                 } if (turn.HasFlag(Char.CABBAGE)) {
-                    lblCabbage.Left += difference;
+                    imageController.transfer(pbCabbage);
                 }
-                side = !side;
                 await TaskEx.Delay(1000);
             }
 

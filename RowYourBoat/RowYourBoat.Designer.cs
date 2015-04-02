@@ -41,6 +41,7 @@
             this.lblCabbage = new System.Windows.Forms.Label();
             this.lblBoatman = new System.Windows.Forms.Label();
             this.gbChars = new System.Windows.Forms.GroupBox();
+            this.gbImages = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbWolf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCabbage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSheep)).BeginInit();
@@ -48,12 +49,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbBoat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBackground)).BeginInit();
             this.gbChars.SuspendLayout();
+            this.gbImages.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(454, 335);
+            this.lblInfo.Location = new System.Drawing.Point(445, 365);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(35, 13);
             this.lblInfo.TabIndex = 0;
@@ -61,7 +63,7 @@
             // 
             // pbWolf
             // 
-            this.pbWolf.Location = new System.Drawing.Point(21, 21);
+            this.pbWolf.Location = new System.Drawing.Point(6, 19);
             this.pbWolf.Name = "pbWolf";
             this.pbWolf.Size = new System.Drawing.Size(78, 93);
             this.pbWolf.TabIndex = 1;
@@ -69,7 +71,7 @@
             // 
             // pbCabbage
             // 
-            this.pbCabbage.Location = new System.Drawing.Point(21, 217);
+            this.pbCabbage.Location = new System.Drawing.Point(6, 215);
             this.pbCabbage.Name = "pbCabbage";
             this.pbCabbage.Size = new System.Drawing.Size(78, 102);
             this.pbCabbage.TabIndex = 2;
@@ -77,7 +79,7 @@
             // 
             // pbSheep
             // 
-            this.pbSheep.Location = new System.Drawing.Point(21, 120);
+            this.pbSheep.Location = new System.Drawing.Point(6, 118);
             this.pbSheep.Name = "pbSheep";
             this.pbSheep.Size = new System.Drawing.Size(78, 91);
             this.pbSheep.TabIndex = 3;
@@ -85,15 +87,15 @@
             // 
             // pbBoatman
             // 
-            this.pbBoatman.Location = new System.Drawing.Point(338, 94);
+            this.pbBoatman.Location = new System.Drawing.Point(90, 91);
             this.pbBoatman.Name = "pbBoatman";
-            this.pbBoatman.Size = new System.Drawing.Size(78, 59);
+            this.pbBoatman.Size = new System.Drawing.Size(210, 145);
             this.pbBoatman.TabIndex = 4;
             this.pbBoatman.TabStop = false;
             // 
             // pbBoat
             // 
-            this.pbBoat.Location = new System.Drawing.Point(218, 159);
+            this.pbBoat.Location = new System.Drawing.Point(222, 19);
             this.pbBoat.Name = "pbBoat";
             this.pbBoat.Size = new System.Drawing.Size(198, 120);
             this.pbBoat.TabIndex = 5;
@@ -101,7 +103,7 @@
             // 
             // pbBackground
             // 
-            this.pbBackground.Location = new System.Drawing.Point(21, 21);
+            this.pbBackground.Location = new System.Drawing.Point(6, 19);
             this.pbBackground.Name = "pbBackground";
             this.pbBackground.Size = new System.Drawing.Size(747, 298);
             this.pbBackground.TabIndex = 6;
@@ -109,7 +111,7 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(693, 449);
+            this.btnNext.Location = new System.Drawing.Point(693, 478);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 7;
@@ -157,28 +159,38 @@
             // 
             this.gbChars.Controls.Add(this.lblWolf);
             this.gbChars.Controls.Add(this.lblBoatman);
+            this.gbChars.Controls.Add(this.pbBoat);
             this.gbChars.Controls.Add(this.lblSheep);
             this.gbChars.Controls.Add(this.lblCabbage);
-            this.gbChars.Location = new System.Drawing.Point(21, 325);
+            this.gbChars.Location = new System.Drawing.Point(12, 354);
             this.gbChars.Name = "gbChars";
             this.gbChars.Size = new System.Drawing.Size(427, 147);
             this.gbChars.TabIndex = 12;
             this.gbChars.TabStop = false;
             // 
+            // gbImages
+            // 
+            this.gbImages.Controls.Add(this.pbBoatman);
+            this.gbImages.Controls.Add(this.pbWolf);
+            this.gbImages.Controls.Add(this.pbCabbage);
+            this.gbImages.Controls.Add(this.pbSheep);
+            this.gbImages.Controls.Add(this.pbBackground);
+            this.gbImages.ForeColor = System.Drawing.Color.Coral;
+            this.gbImages.Location = new System.Drawing.Point(12, 12);
+            this.gbImages.Name = "gbImages";
+            this.gbImages.Size = new System.Drawing.Size(756, 336);
+            this.gbImages.TabIndex = 13;
+            this.gbImages.TabStop = false;
+            // 
             // RowYourBoat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 484);
+            this.ClientSize = new System.Drawing.Size(780, 513);
             this.Controls.Add(this.gbChars);
             this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.pbBoat);
-            this.Controls.Add(this.pbBoatman);
-            this.Controls.Add(this.pbSheep);
-            this.Controls.Add(this.pbCabbage);
-            this.Controls.Add(this.pbWolf);
             this.Controls.Add(this.lblInfo);
-            this.Controls.Add(this.pbBackground);
+            this.Controls.Add(this.gbImages);
             this.Name = "RowYourBoat";
             this.Text = "Row Your Boat";
             this.Load += new System.EventHandler(this.RowYourBoat_Load);
@@ -190,6 +202,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbBackground)).EndInit();
             this.gbChars.ResumeLayout(false);
             this.gbChars.PerformLayout();
+            this.gbImages.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,6 +223,7 @@
         private System.Windows.Forms.Label lblCabbage;
         private System.Windows.Forms.Label lblBoatman;
         private System.Windows.Forms.GroupBox gbChars;
+        private System.Windows.Forms.GroupBox gbImages;
     }
 }
 

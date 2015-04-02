@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Char.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="ImageController.cs" />
     <Compile Include="Tree\DFS.cs" />
     <Compile Include="Tree\Graph.cs" />
     <Compile Include="Tree\BFS.cs" />
