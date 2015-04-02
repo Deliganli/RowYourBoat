@@ -15,7 +15,6 @@ namespace RowYourBoat
         private PictureBox pbSheep;
         private PictureBox pbCabbage;
         private PictureBox pbBoatman;
-        private PictureBox pbBoat;
         private PictureBox pbBackground;
 
         private Panel pImages;
@@ -29,29 +28,27 @@ namespace RowYourBoat
             this.pbBoatman = boatman;
             this.pbBackground = background;
             this.pImages = images;
+            makeTransparent();
         }
 
-        public void inflatePictures()
+        private void makeTransparent()
         {
-            string basePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            pbCabbage.ImageLocation = basePath + "\\Resources\\seed.png";
-            pbSheep.ImageLocation = basePath + "\\Resources\\roadrunner.png";
-            pbWolf.ImageLocation = basePath + "\\Resources\\coyote.png";
-            pbBoatman.ImageLocation = basePath + "\\Resources\\boat_and_boatman.png";
-            this.setSizeModeForAll(PictureBoxSizeMode.StretchImage);
+            pbBackground.Controls.Add(pbWolf);
+            pbBackground.Controls.Add(pbSheep);
+            pbBackground.Controls.Add(pbCabbage);
+            pbBackground.Controls.Add(pbBoatman);
+            pbWolf.BackColor = Color.Transparent;
+            pbSheep.BackColor = Color.Transparent;
+            pbCabbage.BackColor = Color.Transparent;
+            pbBoatman.BackColor = Color.Transparent;
         }
 
-        private void setSizeModeForAll(PictureBoxSizeMode sizeMode)
-        {
-            pbCabbage.SizeMode = sizeMode;
-            pbSheep.SizeMode = sizeMode;
-            pbWolf.SizeMode = sizeMode;
-            pbBoatman.SizeMode = sizeMode;
-        }
+        
 
         public void transfer(PictureBox pb)
         {
             bool isLeft = isAtLeft(pb);
+            pb.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
             move(pb, isLeft);
         }
 

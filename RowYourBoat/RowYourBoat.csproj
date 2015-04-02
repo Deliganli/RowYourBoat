@@ -86,6 +86,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="RowYourBoat.resx">
       <DependentUpon>RowYourBoat.cs</DependentUpon>
@@ -102,8 +103,21 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\river.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boat_and_boatman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coyote.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\roadrunner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />

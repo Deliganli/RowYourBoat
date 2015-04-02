@@ -27,23 +27,13 @@ namespace RowYourBoat
 
         private void RowYourBoat_Load(object sender, EventArgs e)
         {
-            lblInfo.Text = String.Empty;
             imageController = new ImageController(pbWolf, pbSheep, pbCabbage, pbBoatman, pbBackground, pImages);
-            imageController.inflatePictures();
 
             AI ai = new AI();
             g = ai.createTree();
             Vertex start = g.getVertex(Char.BOATMAN | Char.WOLF | Char.SHEEP | Char.CABBAGE);
             Vertex end = g.getVertex(Char.NONE);
             BFS.solve(start, end);
-            printSolution(g.trace(end));
-        }
-
-        private void printSolution(List<Vertex> solution)
-        {
-            foreach (Vertex v in solution) {
-                lblInfo.Text += v.Name + Environment.NewLine;
-            }
         }
 
         private List<Char> retreiveTransportationTurns()
